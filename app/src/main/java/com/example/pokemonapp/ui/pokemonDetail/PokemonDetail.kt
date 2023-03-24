@@ -17,14 +17,11 @@ class PokemonDetail : BaseFragment<FragmentMainPageBinding, PokemonDetailViewMod
     viewModelClass = PokemonDetailViewModel::class.java
 ) {
     override fun onInitDataBinding() {
-        val args = this.arguments
-        val userId: String? = args?.getString("pokemonId","")
+        val pokemonId = arguments?.getInt("pokemonId", -1) ?: -1
+
+        binding.a.text = pokemonId.toString()
 
 
-        binding.a.text = userId.toString()
-
-
-        Log.e("burak", userId.toString())
     }
 
 
