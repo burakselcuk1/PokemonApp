@@ -43,7 +43,7 @@ class PokemonDetail : BaseFragment<FragmentMainPageBinding, PokemonDetailViewMod
 
                         observe(viewModel.pokemonDetail){
 
-                          //  binding.pokemonDetailName.text = it.results[position].name
+                             binding.pokemonDetailName.text = it.name.toString()
                             Glide.with(this).load(it.sprites.frontDefault).into(binding.imageView)
 
                         }
