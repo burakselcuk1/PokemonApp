@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.pokemonapp.R
 import com.example.pokemonapp.base.BaseFragment
+import com.example.pokemonapp.common.OverlayManager
 import com.example.pokemonapp.common.enums.Status
 import com.example.pokemonapp.common.extensions.observe
 import com.example.pokemonapp.common.extensions.observeEvent
@@ -27,7 +28,7 @@ class PokemonDetail : BaseFragment<FragmentMainPageBinding, PokemonDetailViewMod
     layoutId = R.layout.fragment_main_page,
     viewModelClass = PokemonDetailViewModel::class.java
 ) {
-    @SuppressLint("MissingInflatedId")
+
     override fun onInitDataBinding() {
         val pokemonId = arguments?.getInt("pokemonId", -1) ?: -1
 
@@ -38,32 +39,8 @@ class PokemonDetail : BaseFragment<FragmentMainPageBinding, PokemonDetailViewMod
 
         binding.button.setOnClickListener {
             activity?.finish()
-
-            val mParams: WindowManager.LayoutParams? = WindowManager.LayoutParams(
-                900,
-                900,
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
-                PixelFormat.TRANSLUCENT)
-
-            val testView = LayoutInflater.from(context).inflate(R.layout.overlay_hello, null)
-
-            val wm = context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-            wm.addView(testView, mParams)
-
-            val overlayName = testView.findViewById<TextView>(R.id.overlay_name)
-            val overlayImage = testView.findViewById<ImageView>(R.id.overlay_image)
-
-            observe(viewModel.pokemonDetail) {
-                overlayName.text = it.name.toString()
-                Glide.with(this).load(it.sprites.frontDefault).into(overlayImage)
-
-            }
-
-            testView.findViewById<Button>(R.id.button2).setOnClickListener {
-                activity?.finish()
-                wm.removeView(testView)
-            }
+            val overlayManager = OverlayManager(requireContext(), viewModel, requireActivity(), viewLifecycleOwner)
+            overlayManager.showOverlay()
         }
     }
 
