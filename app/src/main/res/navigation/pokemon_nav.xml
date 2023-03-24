@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainPageFragment"
-        android:name="com.example.pokemonapp.ui.mainPage.MainPageFragment"
+        android:name="com.example.pokemonapp.ui.pokemonDetail.PokemonDetail"
         android:label="fragment_main_page"
         tools:layout="@layout/fragment_main_page" />
 </navigation>

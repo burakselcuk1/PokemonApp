@@ -1,4 +1,4 @@
-package com.example.pokemonapp.ui.mainPage
+package com.example.pokemonapp.ui.pokemonDetail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.pokemonapp.R
 
 
-class MainPageFragment : Fragment() {
+class PokemonDetail : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
